@@ -1,4 +1,4 @@
-var url = 'http://ar2emis.pythonanywhere.com/users'
+var url = 'https://ar2emis.pythonanywhere.com'
 
 function showModal(){
     var overlay = document.querySelector('.js-overlay-modal');
@@ -10,7 +10,7 @@ function showModal(){
  function  confirmUserNameFromDataBase(login){
     return new Promise((resolve, reject) =>{
         var userurl;
-        userurl = url + '/' + login;
+        userurl = url + '/users/' + login;
         var sdfasf;
         sendRequest('GET',userurl)
         .then(data => resolve(data))
@@ -56,6 +56,15 @@ function init(){
     if(!localStorage.getItem('username')){
         showModal();
     }
+    else{
+        loadWorker()
+    }
+}
+
+function loadWorker(){
+    user = JSON.parse(localStorage.getItem('user'));
+    $('p.workerName').html(user.name)
+    $('p.workerRole').html(user.role.name)
 }
 
 function logIn(){
@@ -63,22 +72,24 @@ function logIn(){
 
     if(login ==''){
         Swal.fire({
-            title: 'Ошибка!',
-            text: 'Введите свой логин',
-            icon: 'error'
+            title: 'Введите логин!',
+            icon: 'error',
+            timer: '1000',
+            showConfirmButton: false
           })
           return
     }
 
     confirmUserNameFromDataBase(login)  
-    .then(() =>{
+    .then(data =>{
         localStorage.setItem('username', login)
+        localStorage.setItem('user', JSON.stringify(data))
         window.open('index.html','_self');
+        loadWorker()
     })
     .catch(()=>{
         Swal.fire({
-            title: 'Повторите попытку',
-            text: 'Упс... Что-то пошло не так',
+            title: 'Неверный логин!',
             icon: 'error',
             timer: '1000',
             showConfirmButton: false
