@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+}
+
+.wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+
+.wrap .profilePart {
+  background: #8387c4;
+  width: 25vw;
+  margin: 0;
+  height: 100vh;
+  position: relative;
+  border-right: 3px solid #6369c2;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.wrap .profilePart .exitButton {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  width: 100%;
+}
+
+.wrap .profilePart .exitButton button {
+  outline: none;
+  font-size: 2vw;
+  cursor: pointer;
+  padding: 3px 0;
+  background: none;
+  width: 40%;
+  margin: 0 30%;
+  border-radius: 5px;
+  text-align: center;
+  color: #353a80;
+  border: 0.2vw solid #353a80;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.wrap .profilePart .exitButton :hover {
+  color: #6369c2;
+  background: #353a80;
+}
+
+.wrap .listPart {
+  height: 100vh;
+  width: 75vw;
+}
+
+.overlay {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: cadetblue;
+  z-index: 20;
+  -webkit-transition: .3s all;
+  transition: .3s all;
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  width: 95%;
+  max-width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 30;
+  -webkit-box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background-color: #35353580;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.modal .modalLogo {
+  width: 120px;
+  height: 120px;
+  margin: 10px auto;
+  border-radius: 50%;
+  background: blue;
+}
+
+.modal .modalInputs {
+  display: -ms-grid;
+  display: grid;
+}
+
+.modal .modalInputs input {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.modal.active,
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loader {
+  background: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.loader .loader_inner {
+  -webkit-animation: animate 1.5s linear infinite;
+          animation: animate 1.5s linear infinite;
+  clip: rect(0, 80px, 80px, 40px);
+  height: 80px;
+  width: 80px;
+  opacity: 0;
+  position: absolute;
+  left: calc(50% - 40px);
+  top: calc(50% - 40px);
+}
+
+@-webkit-keyframes animate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(220deg);
+            transform: rotate(220deg);
+  }
+}
+
+@keyframes animate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(220deg);
+            transform: rotate(220deg);
+  }
+}
+
+.loader .loader_inner:after {
+  -webkit-animation: animate2 1.5s ease-in-out infinite;
+          animation: animate2 1.5s ease-in-out infinite;
+  clip: rect(0, 80px, 80px, 40px);
+  content: '';
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  position: absolute;
+}
+
+@-webkit-keyframes animate2 {
+  0% {
+    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
+            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-transform: rotate(-140deg);
+            transform: rotate(-140deg);
+  }
+  50% {
+    -webkit-box-shadow: inset #b3dfd8 0 0 0 2px;
+            box-shadow: inset #b3dfd8 0 0 0 2px;
+  }
+  100% {
+    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
+            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-transform: rotate(140deg);
+            transform: rotate(140deg);
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
+            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-transform: rotate(-140deg);
+            transform: rotate(-140deg);
+  }
+  50% {
+    -webkit-box-shadow: inset #b3dfd8 0 0 0 2px;
+            box-shadow: inset #b3dfd8 0 0 0 2px;
+  }
+  100% {
+    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
+            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-transform: rotate(140deg);
+            transform: rotate(140deg);
+  }
+}
+/*# sourceMappingURL=index.css.map */

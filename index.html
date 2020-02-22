@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Assets/Css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+    <title>ToDoList</title>
+</head>
+<body onload="init()">
+    <div class="wrap">
+        <div class="profilePart">
+            <div class="exitButton">
+                <button onclick="logOut()">Выход</button>
+            </div>
+        </div>
+        <div class="listPart">
+
+        </div>
+    </div>
+    <div class="modal" data-modal="1">
+        <div class="modalLogo">
+
+        </div>
+        <div class="modalInputs">
+            <input id="loginField" type="text">
+            <button onclick="logIn()">Войти</button>
+        </div>
+     </div>
+     <div class="loader">
+        <div class="loader_inner"></div>
+      </div>
+     <div class="overlay js-overlay-modal" id="overlay-modal"></div>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="Assets/JavaScript/index.js"></script>
+</body>
+</html>
