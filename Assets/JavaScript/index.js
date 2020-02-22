@@ -1,4 +1,4 @@
-var url = 'http://ar2emis.pythonanywhere.com/users'
+var url = 'https://ar2emis.pythonanywhere.com/users'
 
 function showModal(){
     var overlay = document.querySelector('.js-overlay-modal');
