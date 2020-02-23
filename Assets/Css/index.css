@@ -11,18 +11,23 @@
 
 .wrap .profilePart {
   background: url(../Images/background-black.jpg);
+  background-size: contain;
   width: 25vw;
   margin: 0;
+  color: white;
   height: 100vh;
   position: relative;
-  border-right: 3px solid #6369c2;
+  border-right: 1px solid #6e6c6c;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
+.wrap .profilePart .projectLogo {
+  text-align: center;
+}
+
 .wrap .profilePart .projectLogo img {
-  width: 85%;
-  margin-left: 7.5%;
+  width: 70%;
 }
 
 .wrap .profilePart .exitButton {
@@ -51,13 +56,33 @@
 }
 
 .wrap .profilePart .exitButton :hover {
-  color: #6369c2;
   background: #353a80;
 }
 
 .wrap .listPart {
   height: 100vh;
   width: 75vw;
+  position: relative;
+}
+
+.wrap .listPart .leftPhoto {
+  position: absolute;
+  width: 30%;
+  left: 0;
+  top: 0;
+  background-size: cover;
+  height: 100vh;
+  background: url(../Images/2.jpg);
+}
+
+.wrap .listPart .rightPhoto {
+  position: absolute;
+  width: 30%;
+  right: 0;
+  background-size: cover;
+  top: 0;
+  height: 100vh;
+  background: url(../Images/1.jpg);
 }
 
 .overlay {
@@ -76,18 +101,29 @@
 
 .overlay .leftPhoto {
   position: absolute;
-  top: 0;
+  width: 22.9%;
   left: 0;
-  width: 30vw;
+  top: 0;
   height: 100vh;
+  background: url(../Images/2.jpg);
 }
 
 .overlay .rightPhoto {
   position: absolute;
-  top: 0;
+  width: 22.9%;
   right: 0;
-  width: 30vw;
+  top: 0;
   height: 100vh;
+  background: url(../Images/1.jpg);
+}
+
+@media screen and (max-width: 800px) {
+  .overlay .rightPhoto {
+    display: none;
+  }
+  .overlay .leftPhoto {
+    width: 100vw;
+  }
 }
 
 .modal {
@@ -126,14 +162,27 @@
   margin: 20px auto;
 }
 
+.modal .modalInputs #loginField {
+  height: 80%;
+  width: 45%;
+  padding: 0 2%;
+  margin-top: 0px;
+  outline: none;
+  border: none;
+  font-size: 1.05rem;
+  border-bottom: 1px solid black;
+  -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
 .modal .modalInputs button {
   width: 50%;
-  color: #757575;
-  margin: 0 auto;
+  color: #6e6c6c;
+  margin: 5% auto;
   border: 2.5px solid;
   border-radius: 25px;
   padding: 9px;
-  background: #e7dfdf;
+  background: #cccccc;
   font-size: 1.5rem;
   outline: none;
   -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
@@ -145,7 +194,16 @@
 
 .modal .modalInputs button:hover {
   color: black;
-  background: #757575;
+  background: #acabab;
+}
+
+@media screen and (max-width: 800px) {
+  .modal .modalInputs #loginField {
+    width: 80%;
+  }
+  .modal .modalInputs button {
+    width: 70%;
+  }
 }
 
 .modal.active,
@@ -213,18 +271,18 @@
 
 @-webkit-keyframes animate2 {
   0% {
-    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
-            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-box-shadow: inset #6e6c6c 0 0 0 17px;
+            box-shadow: inset #6e6c6c 0 0 0 17px;
     -webkit-transform: rotate(-140deg);
             transform: rotate(-140deg);
   }
   50% {
-    -webkit-box-shadow: inset #b3dfd8 0 0 0 2px;
-            box-shadow: inset #b3dfd8 0 0 0 2px;
+    -webkit-box-shadow: inset #6e6c6c 0 0 0 2px;
+            box-shadow: inset #6e6c6c 0 0 0 2px;
   }
   100% {
-    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
-            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-box-shadow: inset #6e6c6c 0 0 0 17px;
+            box-shadow: inset #6e6c6c 0 0 0 17px;
     -webkit-transform: rotate(140deg);
             transform: rotate(140deg);
   }
@@ -232,18 +290,18 @@
 
 @keyframes animate2 {
   0% {
-    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
-            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-box-shadow: inset #6e6c6c 0 0 0 17px;
+            box-shadow: inset #6e6c6c 0 0 0 17px;
     -webkit-transform: rotate(-140deg);
             transform: rotate(-140deg);
   }
   50% {
-    -webkit-box-shadow: inset #b3dfd8 0 0 0 2px;
-            box-shadow: inset #b3dfd8 0 0 0 2px;
+    -webkit-box-shadow: inset #6e6c6c 0 0 0 2px;
+            box-shadow: inset #6e6c6c 0 0 0 2px;
   }
   100% {
-    -webkit-box-shadow: inset #b3dfd8 0 0 0 17px;
-            box-shadow: inset #b3dfd8 0 0 0 17px;
+    -webkit-box-shadow: inset #6e6c6c 0 0 0 17px;
+            box-shadow: inset #6e6c6c 0 0 0 17px;
     -webkit-transform: rotate(140deg);
             transform: rotate(140deg);
   }

@@ -11,7 +11,6 @@ function showModal(){
     return new Promise((resolve, reject) =>{
         var userurl;
         userurl = url + '/users/' + login;
-        var sdfasf;
         sendRequest('GET',userurl)
         .then(data => resolve(data))
         .catch(err => reject(err))
@@ -27,6 +26,7 @@ function sendRequest(method, url, body = null){
         $(".loader").delay(400).fadeIn("slow");
         xhr.open(method, url, true);
         xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-Type', 'application/json')
         xhr.onload = () =>{
             if(xhr.status >=400){
                 $(".loader_inner").fadeOut();
@@ -44,7 +44,7 @@ function sendRequest(method, url, body = null){
             reject(xhr.response)
         }
 
-        xhr.send();
+        xhr.send(JSON.stringify(body));
     })
 }
 
@@ -64,7 +64,26 @@ function init(){
 function loadWorker(){
     user = JSON.parse(localStorage.getItem('user'));
     $('p.workerName').html(user.name)
-    $('p.workerRole').html(user.role.name)
+    sendRequest('GET',user.role)
+    .then(data => {
+        $('p.workerRole').html(data.name)
+    })
+    .catch(err => reject(err))
+}
+
+function setStatus(login){
+    return new Promise((resolve, reject) =>{
+        var userurl;
+        userurl = url + '/users/' + login;
+
+        var body ={
+            'active' : true
+        }
+
+        sendRequest('PATCH',userurl, body)
+        .then(data => resolve(data))
+        .catch(err => reject(err))
+    })
 }
 
 function logIn(){
@@ -82,10 +101,25 @@ function logIn(){
 
     confirmUserNameFromDataBase(login)  
     .then(data =>{
+        console.log(data.active)
+        if(data.active == true){
+            Swal.fire({
+                title: 'Пользователь уже в сети!',
+                icon: 'error',
+                timer: '1000',
+                showConfirmButton: false
+              })   
+              $('#loginField').val('');
+              return
+        }
         localStorage.setItem('username', login)
-        localStorage.setItem('user', JSON.stringify(data))
-        window.open('index.html','_self');
-        loadWorker()
+        setStatus(login)
+        .then((data) => {
+            localStorage.setItem('user', JSON.stringify(data))
+            window.open('index.html','_self');
+            loadWorker()
+        })
+        .catch(() => {})
     })
     .catch(()=>{
         Swal.fire({
@@ -97,8 +131,28 @@ function logIn(){
           $('#loginField').val('');
     });
 }
+
+function setOfflineStatus(login){
+    return new Promise((resolve, reject) =>{
+        var userurl;
+        userurl = url + '/users/' + login;
+
+        var body ={
+            'active' : false
+        }
+
+        sendRequest('PATCH',userurl, body)
+        .then(data => resolve(data))
+        .catch(err => reject(err))
+    })
+}
     
 function logOut(){
-    localStorage.clear();
-    window.open('index.html','_self');
+    var login = localStorage.getItem('username')
+    setOfflineStatus(login)
+    .then(() => {
+        localStorage.clear();
+        window.open('index.html','_self');
+    })
+    .catch(() => console.log('tut'))
 }

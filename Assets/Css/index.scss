@@ -2,8 +2,6 @@
     margin: 0;
 }
 
-$backgroundProfileColor: #8387c4;
-$linesColor: #6369c2;
 $primaryColor: #353a80;
 
 .wrap{
@@ -12,17 +10,19 @@ $primaryColor: #353a80;
 
     .profilePart{
         background: url(../Images/background-black.jpg);
+        background-size: contain;
         width: 25vw;
         margin: 0;
+        color: white;
         height: 100vh;
         position: relative;
-        border-right: 3px solid $linesColor;
+        border-right: 1px solid #6e6c6c;
         box-sizing: border-box;
 
         .projectLogo{
+            text-align: center;
             img{
-                width: 85%;
-                margin-left: 7.5%;
+                width: 70%;
             }
         }
 
@@ -48,7 +48,6 @@ $primaryColor: #353a80;
                 transition: .5s;
             }
             :hover{
-                color: $linesColor;
                 background: $primaryColor;
             }
         }
@@ -57,6 +56,28 @@ $primaryColor: #353a80;
     .listPart{
         height: 100vh;
         width: 75vw;
+        position: relative;
+
+        .leftPhoto{
+            position: absolute;
+            width: 30%;
+            left: 0;
+            top: 0;
+            background-size: cover;
+            height: 100vh;
+            background: url(../Images/2.jpg);
+        }
+
+        .rightPhoto{
+            position: absolute;
+            width: 30%;
+            right: 0;
+            background-size: cover;
+            top: 0;
+            height: 100vh;
+            background: url(../Images/1.jpg);
+        }
+
     }
 }
 
@@ -77,19 +98,31 @@ $primaryColor: #353a80;
 
     .leftPhoto{
         position: absolute;
-        top: 0;
+        width: 22.9%;
         left: 0;
-        width: 30vw;
+        top: 0;
         height: 100vh;
+        background: url(../Images/2.jpg);
     }
 
     .rightPhoto{
         position: absolute;
-        top: 0;
+        width: 22.9%;
         right: 0;
-        width: 30vw;
+        top: 0;
         height: 100vh;
+        background: url(../Images/1.jpg);
     }
+
+    @media screen and (max-width:800px){
+        .rightPhoto{
+            display: none;
+        }
+        .leftPhoto{
+            width: 100vw;
+        }
+    }
+
   }
 
 .modal{
@@ -123,14 +156,26 @@ $primaryColor: #353a80;
           margin: 20px auto;
       }
 
+      #loginField{
+        height: 80%;
+        width: 45%;
+        padding: 0 2%;
+        margin-top: 0px;
+        outline: none;
+        border: none;
+        font-size: 1.05rem;
+        border-bottom: 1px solid black;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+      }
+
       button{
         width: 50%;
-        color: #757575;
-        margin: 0 auto;
+        color: #6e6c6c;
+        margin: 5% auto;
         border: 2.5px solid;
         border-radius: 25px;
         padding: 9px;
-        background: #e7dfdf;
+        background: #cccccc;
         font-size: 1.5rem;
         outline: none;
         box-shadow: 1px 3px 5px rgba(0,0,0,0.5);
@@ -140,7 +185,17 @@ $primaryColor: #353a80;
 
       button:hover{
         color: black;
-        background: #757575;
+        background: #acabab;
+      }
+
+      @media screen and(max-width: 800px) {
+          #loginField{
+              width: 80%;
+          }
+
+          button{
+              width: 70%;
+          }
       }
   }
 }
@@ -191,14 +246,14 @@ $primaryColor: #353a80;
   }
   @keyframes animate2 {
     0% {
-      box-shadow: inset #b3dfd8 0 0 0 17px;
+      box-shadow: inset #6e6c6c 0 0 0 17px;
       transform: rotate(-140deg);
     }
     50% {
-      box-shadow: inset #b3dfd8 0 0 0 2px;
+      box-shadow: inset #6e6c6c 0 0 0 2px;
     }
     100% {
-      box-shadow: inset #b3dfd8 0 0 0 17px;
+      box-shadow: inset #6e6c6c 0 0 0 17px;
       transform: rotate(140deg);
     }
   }
