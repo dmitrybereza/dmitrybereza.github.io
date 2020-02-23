@@ -55,9 +55,11 @@ function init(){
     $(".loader").fadeOut();
     if(!localStorage.getItem('username')){
         showModal();
+        
     }
     else{
         loadWorker()
+        loadContent()
     }
 }
 
@@ -67,6 +69,10 @@ function loadWorker(){
     sendRequest('GET',user.role)
     .then(data => {
         $('p.workerRole').html(data.name)
+        localStorage.setItem('roleName', data.name)
+        if(data.name == 'Менеджер'){
+            localStorage.setItem('isManager', 'true')
+        }
     })
     .catch(err => reject(err))
 }
@@ -154,5 +160,225 @@ function logOut(){
         localStorage.clear();
         window.open('index.html','_self');
     })
-    .catch(() => console.log('tut'))
+    .catch(() => {})
+}
+
+
+function loadWatch(watchName){
+    return new Promise((resolve, reject) =>{
+        var userurl;
+        userurl = url + '/watches?date=' + watchName
+        sendRequest('GET',userurl)
+        .then(data => resolve(data))
+        .catch(err => reject(err))
+    })
+}
+
+function taskIsDone(url){
+    var body ={
+        'worker': JSON.parse(localStorage.getItem('user')).url,
+        'progress' : 'https://ar2emis.pythonanywhere.com/progress/done/'
+    }
+    sendRequest('PATCH',url, body)
+    .then(()=>{
+        loadContent() 
+    }) 
+}
+
+function showTaskPhoto(url){
+    sendRequest("GET", url)
+    .then(data => { 
+        var img =''
+        img += '<img src="data:image/gif;base64,' + data.image + '">';
+        $('.taskCheck').html(img)
+    })
+}
+
+  function encodeImageFileAsURL() {
+
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0) {
+      var fileToLoad = filesSelected[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result;
+
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+
+        var src = newImage.src
+        src = src.replace('data:image/jpeg;base64,', '')
+        console.log(src)
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+
+function showTask(task){
+    out = ''
+        if(localStorage.getItem('isManager') == 'true'){
+            out+='<div class taskType>'
+        out+='<p>'+task.work_type.name+'</p>'
+        out+='</div>'
+    }
+    out+='<div class="task">'
+    out+='<div class taskName>'
+    out+='<p>'+task.name+'</p>'
+    out+='</div>'
+    out+='<div class taskText>'
+    out+='<p>'+task.text+'</p>'
+    out+='</div>'
+    if(task.progress.name == 'To do'){
+        out+='<div class="taskCheck">'
+        out+='<input onclick="taskIsDone(\'' + task.url + '\')" type="checkbox">'
+        out+='</div>'
+        out+='<div class taskImg>'
+        out+='<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL(\'' + task.url + '\');"/>'
+        out+='</div>'
+    }
+    else if(task.progress.name == 'In Progress'){
+        out+='<div class="taskCheck">'
+        out+='<p class="taskProgressProgress">Выполняется...</p>'
+        out+='</div>'
+    }
+    else{
+        if(localStorage.getItem('isManager') == 'true'){
+            out+='<div class="taskCheck">'
+            out+='<p class="taskProgressDone">Сделано '+task.worker.name+'</p>'
+            out+='</div>'
+            out+='<div class="taskImg">'
+            out+='<button onclick="showTaskPhoto(\'' + task.url + '\')">Показать</button>'
+            out+='</div>'
+        }
+        else{
+            out+='<div class="taskCheck">'
+            out+='<p class="taskProgressDone">Сделано</p>'
+            out+='</div>'
+        }
+    }
+    out+='<div class="horizontalLine">'
+        out+='<hr>'
+        out+='</div>'
+    out+='</div>'
+    return out
+}
+
+function dateCalculate(direction){
+    var url = JSON.parse(localStorage.getItem('watch')).url
+    var number = url.substr(43)
+    number = number.replace('/', '')
+    url = url.substr(0, 43)
+    if(direction == 'back'){
+        if(number != 1){
+            number--
+        }
+    }
+    else{
+        number++
+    }
+    url = url + number
+    return url
+}
+
+function previousDate(){
+    sendRequest('GET',dateCalculate('back'))
+        .then(data => {
+            loadTasks(data)
+            loadDate(data)
+            localStorage.setItem('watch', JSON.stringify(data))
+
+        })
+        .catch(err => reject(err))
+}
+
+function nextDate(){
+    sendRequest('GET',dateCalculate('next'))
+        .then(data => {
+            loadTasks(data)
+            loadDate(data)
+            localStorage.setItem('watch', JSON.stringify(data))
+        })
+        .catch(err => reject(err))
+}
+
+function loadDate(watch){
+    out = ''
+    if(localStorage.getItem('roleName') == 'Менеджер'){
+        out +='<div onclick="previousDate()" class="leftArrow">'
+        out+='<i class="fas fa-chevron-left"></i>'
+        out+='</div>'
+        out+='<div class="Date">'
+        out+='<p class="dateP">'+watch.date+'</p>'
+        out+='<p class="dateP">'+watch.watch_type.name+'</p>'
+        out+='</div>'
+        out+='<div onclick="nextDate()" class="rightArrow">'
+        out+='<i class="fas fa-chevron-right"></i>'
+        out+='</div>'
+    }
+    else{
+        out+='<div class="Date">'
+        out+='<p>'+watch.date+'</p>'
+        out+='<p class="dateP">'+watch.watch_type.name+'</p>'
+        out+='</div>'
+    }
+    $('.dateDiv').html(out) 
+}
+
+function loadTasks(watch){
+    loadDate(watch)
+    var user = localStorage.getItem('user')
+    var out = ''
+    for(var id in watch.tasks){
+        if(localStorage.getItem('isManager') == 'true'){
+            out += showTask(watch.tasks[id])
+        }
+        else{
+            if(watch.tasks[id].work_type.name == localStorage.getItem('roleName')){
+                out += showTask(watch.tasks[id])
+            }
+        }
+        
+    }
+    $('.watchTasks').html(out)   
+}
+
+function loadContent(){
+    
+    var dateMonth = date.getMonth() + 1
+    var dateDay = date.getDate()
+    var type = 'День'
+
+    if(dateDay < 10){
+        dateDay = '0' + dateDay
+    }
+
+    if(dateMonth < 10){
+        dateMonth = '0'+ dateMonth
+    }
+
+    var watchName = date.getFullYear() + '-' + dateMonth + '-' + dateDay
+
+    localStorage.setItem('date', watchName)
+
+    var watch = {}
+    loadWatch(watchName)
+    
+    .then(data => {
+        if(date.getHours() > 12){
+            type = 'Ночь'
+        }
+
+        for(var temp in data){
+            if(data[temp].watch_type.name == type){
+                watch = data[temp]
+            }
+        }
+
+        localStorage.setItem('watch', JSON.stringify(watch))
+
+        loadTasks(watch)
+    })
+    .catch(err => console.log(err, err.status))
 }

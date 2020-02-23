@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family: 'Montserrat';
 }
 
 $primaryColor: #353a80;
@@ -21,14 +22,34 @@ $primaryColor: #353a80;
 
         .projectLogo{
             text-align: center;
+            margin-top: 10%;
             img{
                 width: 70%;
             }
         }
 
+        .workerInfo{
+            margin-top: 12%;
+            font-size: 2vw;
+            text-align: center;
+            .workerRoleDiv, 
+            .workerNameDiv{
+                div{
+                    display: flex;
+                    margin: 0 auto;
+                width: fit-content;
+                }
+            }
+
+            .workerName, 
+            .workerRole{
+                margin-left: 5px;
+            }
+        }
+
         .exitButton{
             position: absolute;
-            bottom: 5%;
+            bottom: 10%;
             left: 50%;
             transform: translate(-50%);
             width: 100%;
@@ -39,16 +60,17 @@ $primaryColor: #353a80;
                 cursor: pointer;
                 padding: 3px 0;
                 background: none;
-                width: 40%;
-                margin: 0 30%;
-                border-radius: 5px;
+                width: 50%;
+                margin: 0 25%;
+                border-radius: 25px;
                 text-align: center;
-                color: $primaryColor;
-                border: 0.2vw solid $primaryColor;
+                color: white;
+                border: 0.2vw solid white;
                 transition: .5s;
             }
             :hover{
-                background: $primaryColor;
+                background: white;
+                color: black;
             }
         }
     }
@@ -78,6 +100,55 @@ $primaryColor: #353a80;
             background: url(../Images/1.jpg);
         }
 
+        .taskList{
+            background: #00000095;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px gray;
+            width: 90%;
+            top: 5%;
+            left: 5%;
+            position: absolute;
+            overflow-y: auto;
+            height: 90vh;
+
+            .watchDate{
+                width: 100%;
+                color: white;
+                .dateDiv{
+                    display: flex;
+                    text-align: center;
+                    width: 217px;
+                    margin: 0 auto;
+                    .Date{
+                        display: block;
+                        font-size:1.5rem;
+                    }
+
+                    .leftArrow,
+                    .rightArrow{
+                        font-size: 3rem;
+                        transition: .5s;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    .rightArrow{
+                        margin-left: 5%;
+                    }
+                    .leftArrow{
+                        margin-right: 5%;
+                    }
+
+                    .rightArrow:hover{
+                        transform: scale(1.1);
+                    }
+                    .leftArrow:hover{
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -86,7 +157,6 @@ $primaryColor: #353a80;
 .overlay {
     opacity: 0;
     visibility: hidden;
-    
     position: fixed;
     top: 0;
     left: 0;
@@ -131,7 +201,7 @@ $primaryColor: #353a80;
   width: 95%;
   max-width: 500px;
   position: fixed;
-  top: 50%;
+  top: 40%;
   height: 60%;
   left: 50%;
   transform: translate(-50%, -50%);

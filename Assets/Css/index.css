@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  font-family: 'Montserrat';
 }
 
 .wrap {
@@ -24,15 +25,38 @@
 
 .wrap .profilePart .projectLogo {
   text-align: center;
+  margin-top: 10%;
 }
 
 .wrap .profilePart .projectLogo img {
   width: 70%;
 }
 
+.wrap .profilePart .workerInfo {
+  margin-top: 12%;
+  font-size: 2vw;
+  text-align: center;
+}
+
+.wrap .profilePart .workerInfo .workerRoleDiv div,
+.wrap .profilePart .workerInfo .workerNameDiv div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.wrap .profilePart .workerInfo .workerName,
+.wrap .profilePart .workerInfo .workerRole {
+  margin-left: 5px;
+}
+
 .wrap .profilePart .exitButton {
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
@@ -45,18 +69,19 @@
   cursor: pointer;
   padding: 3px 0;
   background: none;
-  width: 40%;
-  margin: 0 30%;
-  border-radius: 5px;
+  width: 50%;
+  margin: 0 25%;
+  border-radius: 25px;
   text-align: center;
-  color: #353a80;
-  border: 0.2vw solid #353a80;
+  color: white;
+  border: 0.2vw solid white;
   -webkit-transition: .5s;
   transition: .5s;
 }
 
 .wrap .profilePart .exitButton :hover {
-  background: #353a80;
+  background: white;
+  color: black;
 }
 
 .wrap .listPart {
@@ -83,6 +108,65 @@
   top: 0;
   height: 100vh;
   background: url(../Images/1.jpg);
+}
+
+.wrap .listPart .taskList {
+  background: #00000095;
+  border-radius: 10px;
+  -webkit-box-shadow: 3px 3px 5px gray;
+          box-shadow: 3px 3px 5px gray;
+  width: 90%;
+  top: 5%;
+  left: 5%;
+  position: absolute;
+  overflow-y: auto;
+  height: 90vh;
+}
+
+.wrap .listPart .taskList .watchDate {
+  width: 100%;
+  color: white;
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  width: 217px;
+  margin: 0 auto;
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv .Date {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv .leftArrow,
+.wrap .listPart .taskList .watchDate .dateDiv .rightArrow {
+  font-size: 3rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+  cursor: pointer;
+  outline: none;
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv .rightArrow {
+  margin-left: 5%;
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv .leftArrow {
+  margin-right: 5%;
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv .rightArrow:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.wrap .listPart .taskList .watchDate .dateDiv .leftArrow:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .overlay {
@@ -132,7 +216,7 @@
   width: 95%;
   max-width: 500px;
   position: fixed;
-  top: 50%;
+  top: 40%;
   height: 60%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
