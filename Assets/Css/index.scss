@@ -20,6 +20,7 @@ $primaryColor: #353a80;
         border-right: 1px solid #6e6c6c;
         box-sizing: border-box;
 
+
         .projectLogo{
             text-align: center;
             margin-top: 10%;
@@ -117,7 +118,7 @@ $primaryColor: #353a80;
                 .dateDiv{
                     display: flex;
                     text-align: center;
-                    width: 217px;
+                    width: 225px;
                     margin: 0 auto;
                     .Date{
                         display: block;
@@ -147,8 +148,181 @@ $primaryColor: #353a80;
                     }
                 }
             }
+
+            .watchTasks{
+                color: white;
+                width: 90%;
+                margin: 0 auto;
+
+                .taskType{
+                    margin-top: 3%;
+                    margin-bottom: 1%;
+                    margin-left: 4%;
+                    font-size: 1.3rem;
+                    text-decoration: underline;
+                }
+
+                .task{
+                    position: relative;
+
+                    .taskProgressProgress{
+                        color: coral;
+                    }
+                    .taskCheck{
+                        .pretty{
+                            font-size: 2rem;
+                            margin: 8.3px;
+                        }
+                    }
+
+                    .taskText{
+                        margin-bottom: 2%;
+                        width: 66%;
+                        margin-left: 2%;
+                    }
+
+                    .taskName{
+                        font-size: 1.2rem;
+                        margin-left: 2%;
+                    }
+
+
+                    .taskForm{
+                        display: flex;
+                        position: absolute;
+                        right: 5%;
+                        top: 10%;
+                    }
+
+                    .taskProgressDone{
+                        color: lawngreen;
+                        margin-right: 15px;
+                    }
+
+                    .taskImg{
+
+                        img{
+                            height: 100px;
+                            margin-top: -55px;
+                        }
+                        .inputfile {
+                            width: 0.1px;
+                            height: 0.1px;
+                            opacity: 0;
+                            overflow: hidden;
+                            position: absolute;
+                            z-index: -1;
+                        }   
+
+                        button{
+                            cursor: pointer;
+                            color: white;
+                            border: 2px solid;
+                            background: none;
+                            border-radius: 15px;
+                            transition: .5s;
+                        }
+
+                        button:hover{
+                            color: black;
+                            border: 2px solid white;
+                            background: white;
+                        }
+
+                        label{
+                            font-size: 2.2rem;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
         }
 
+    }
+
+    @media screen  and (max-width:800px)
+    {
+        .profilePart{
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            right:0;
+            z-index: 3;
+            width: 100vw;
+            display:none;
+        }
+
+        .listPart{
+            width: 100vw;
+            overflow: hidden;
+
+            .rightPhoto{
+                display: none;
+            }
+
+            .leftPhoto{
+                width: 100vw;
+                background-size: cover;
+            }
+
+            .taskList{
+
+                height: 80vh;
+                top: 10%;
+                .watchTasks{
+
+                    .taskType{
+                        width: 60%;
+                    }
+                    .task{
+
+                        .taskProgressProgress{
+                            color: coral;
+                            font-size: 0.7rem;
+                            margin-top: 15%;
+                        }
+
+                        .taskText{
+                            width: 60%;
+                        }
+
+                        .taskImg{
+                            text-align: center;
+                            label{
+                                font-size: 1.5rem;
+                            }
+
+                            img{
+                                height: 10vh;
+                            }
+                        }
+
+                        .taskCheck{
+                            .pretty{
+                                font-size: 1.5rem;
+                                margin-top: -5px;
+                            }
+                        }
+
+                        .taskProgressDone{
+                            text-align: center;
+                            width: 100%;
+                            margin-bottom: 5px;
+                        }
+                        .taskForm{
+                            display: block;
+                            margin-top: -15px;
+
+                            .taskImg{
+                                button{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

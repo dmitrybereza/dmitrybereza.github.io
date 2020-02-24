@@ -133,7 +133,7 @@
   display: -ms-flexbox;
   display: flex;
   text-align: center;
-  width: 217px;
+  width: 225px;
   margin: 0 auto;
 }
 
@@ -167,6 +167,156 @@
 .wrap .listPart .taskList .watchDate .dateDiv .leftArrow:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.wrap .listPart .taskList .watchTasks {
+  color: white;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.wrap .listPart .taskList .watchTasks .taskType {
+  margin-top: 3%;
+  margin-bottom: 1%;
+  margin-left: 4%;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+
+.wrap .listPart .taskList .watchTasks .task {
+  position: relative;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskProgressProgress {
+  color: coral;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskCheck .pretty {
+  font-size: 2rem;
+  margin: 8.3px;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskText {
+  margin-bottom: 2%;
+  width: 66%;
+  margin-left: 2%;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskName {
+  font-size: 1.2rem;
+  margin-left: 2%;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  right: 5%;
+  top: 10%;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskProgressDone {
+  color: lawngreen;
+  margin-right: 15px;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskImg img {
+  height: 100px;
+  margin-top: -55px;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskImg .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskImg button {
+  cursor: pointer;
+  color: white;
+  border: 2px solid;
+  background: none;
+  border-radius: 15px;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskImg button:hover {
+  color: black;
+  border: 2px solid white;
+  background: white;
+}
+
+.wrap .listPart .taskList .watchTasks .task .taskImg label {
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .wrap .profilePart {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    right: 0;
+    z-index: 3;
+    width: 100vw;
+    display: none;
+  }
+  .wrap .listPart {
+    width: 100vw;
+    overflow: hidden;
+  }
+  .wrap .listPart .rightPhoto {
+    display: none;
+  }
+  .wrap .listPart .leftPhoto {
+    width: 100vw;
+    background-size: cover;
+  }
+  .wrap .listPart .taskList {
+    height: 80vh;
+    top: 10%;
+  }
+  .wrap .listPart .taskList .watchTasks .taskType {
+    width: 60%;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskProgressProgress {
+    color: coral;
+    font-size: 0.7rem;
+    margin-top: 15%;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskText {
+    width: 60%;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskImg {
+    text-align: center;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskImg label {
+    font-size: 1.5rem;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskImg img {
+    height: 10vh;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskCheck .pretty {
+    font-size: 1.5rem;
+    margin-top: -5px;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskProgressDone {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskForm {
+    display: block;
+    margin-top: -15px;
+  }
+  .wrap .listPart .taskList .watchTasks .task .taskForm .taskImg button {
+    width: 100%;
+  }
 }
 
 .overlay {

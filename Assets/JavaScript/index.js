@@ -60,6 +60,8 @@ function init(){
     else{
         loadWorker()
         loadContent()
+
+        setInterval(loadContent, 10000)
     }
 }
 
@@ -107,7 +109,6 @@ function logIn(){
 
     confirmUserNameFromDataBase(login)  
     .then(data =>{
-        console.log(data.active)
         if(data.active == true){
             Swal.fire({
                 title: 'Пользователь уже в сети!',
@@ -185,16 +186,21 @@ function taskIsDone(url){
     }) 
 }
 
+function openBigPhoto(){
+
+}
+
 function showTaskPhoto(url){
     sendRequest("GET", url)
     .then(data => { 
         var img =''
-        img += '<img src="data:image/gif;base64,' + data.image + '">';
-        $('.taskCheck').html(img)
+        var classPhoto = url.replace('https://ar2emis.pythonanywhere.com/tasks/','')
+        img += '<img  onclick ="openBigPhoto()" src="data:image/gif;base64,' + data.image + '">';
+        document.getElementById(classPhoto).innerHTML = img
     })
 }
 
-  function encodeImageFileAsURL() {
+function encodeImageFileAsURL(url) {
 
     var filesSelected = document.getElementById("inputFileToLoad").files;
     if (filesSelected.length > 0) {
@@ -205,37 +211,51 @@ function showTaskPhoto(url){
       fileReader.onload = function(fileLoadedEvent) {
         var srcData = fileLoadedEvent.target.result;
 
-        var newImage = document.createElement('img');
+        var newImage = new Image()
         newImage.src = srcData;
 
         var src = newImage.src
         src = src.replace('data:image/jpeg;base64,', '')
-        console.log(src)
+        url = url + 'upload_image'
+        console.log(url)
+        var body = {
+            "image": src
+        }
+        sendRequest('PATCH',url,body)
+        .catch(err => console.log(err, err.status)) 
       }
       fileReader.readAsDataURL(fileToLoad);
     }
-  }
+}
 
 function showTask(task){
     out = ''
         if(localStorage.getItem('isManager') == 'true'){
-            out+='<div class taskType>'
+            out+='<div class="taskType">'
         out+='<p>'+task.work_type.name+'</p>'
         out+='</div>'
     }
     out+='<div class="task">'
-    out+='<div class taskName>'
+    out+='<div class="taskName">'
     out+='<p>'+task.name+'</p>'
     out+='</div>'
-    out+='<div class taskText>'
+    out+='<div class="taskText">'
     out+='<p>'+task.text+'</p>'
     out+='</div>'
+    out+='<div class="taskForm">'
     if(task.progress.name == 'To do'){
         out+='<div class="taskCheck">'
-        out+='<input onclick="taskIsDone(\'' + task.url + '\')" type="checkbox">'
+        out+='<div class="pretty p-icon p-round p-pulse">'
+        out+='<input onclick="taskIsDone(\'' + task.url + '\')" type="checkbox" />'
+        out+='<div class="state p-success">'
+        out+='<i class="icon mdi mdi-check"></i>'
+        out+='<label></label>'
         out+='</div>'
-        out+='<div class taskImg>'
-        out+='<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL(\'' + task.url + '\');"/>'
+        out+='</div>'
+        out+='</div>'
+        out+='<div class="taskImg">'
+        out+='<input class="inputfile" id="inputFileToLoad" name="file" type="file" onchange="encodeImageFileAsURL(\'' + task.url + '\');"/>'
+        out+='<label for="inputFileToLoad"><i class="fas fa-camera"></i></label>'
         out+='</div>'
     }
     else if(task.progress.name == 'In Progress'){
@@ -246,10 +266,10 @@ function showTask(task){
     else{
         if(localStorage.getItem('isManager') == 'true'){
             out+='<div class="taskCheck">'
-            out+='<p class="taskProgressDone">Сделано '+task.worker.name+'</p>'
+            out+='<p class="taskProgressDone">Сделано</p>'
             out+='</div>'
-            out+='<div class="taskImg">'
-            out+='<button onclick="showTaskPhoto(\'' + task.url + '\')">Показать</button>'
+            out+='<div id="'+task.url.replace('https://ar2emis.pythonanywhere.com/tasks/','')+'" class="taskImg">'
+            out+='<button onclick="showTaskPhoto(\'' + task.url + '\')">Фото</button>'
             out+='</div>'
         }
         else{
@@ -258,6 +278,7 @@ function showTask(task){
             out+='</div>'
         }
     }
+    out+='</div>'
     out+='<div class="horizontalLine">'
         out+='<hr>'
         out+='</div>'
@@ -346,6 +367,7 @@ function loadTasks(watch){
 
 function loadContent(){
     
+    var date = new Date()
     var dateMonth = date.getMonth() + 1
     var dateDay = date.getDate()
     var type = 'День'
@@ -364,9 +386,8 @@ function loadContent(){
 
     var watch = {}
     loadWatch(watchName)
-    
     .then(data => {
-        if(date.getHours() > 12){
+        if(date.getHours() > 18){
             type = 'Ночь'
         }
 
